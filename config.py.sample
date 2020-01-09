@@ -1,0 +1,4 @@
+FILE = 'tokens.csv'
+SITE_ID = '<your token id>'
+API_KEY = '<your API key'
+LOG_FILE = 'uploader.log'
