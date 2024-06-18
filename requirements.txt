@@ -9,5 +9,5 @@ lazy-object-proxy==1.4.3
 mccabe==0.6.1
 requests==2.32.0
 six==1.13.0
-urllib3==1.26.18
+urllib3==1.26.19
 wrapt==1.11.2
