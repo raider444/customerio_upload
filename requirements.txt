@@ -1,5 +1,5 @@
 certifi==2023.7.22
-astroid==2.3.3
+astroid==3.2.2
 chardet==3.0.4
 colorama==0.4.3
 customerio==0.5.2
