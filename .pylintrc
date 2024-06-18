@@ -1,0 +1,5 @@
+[MASTER]
+fail-under = 9
+
+[MESSAGES CONTROL]
+disable=C0209, R0913, W0718, R1732

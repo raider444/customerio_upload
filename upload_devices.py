@@ -1,17 +1,19 @@
 """
 This code uploads data from CSV to CustomerIO
 """
+
 import csv
+import sys
 import logging
 from customerio import CustomerIO, CustomerIOException
-from config import *
+from config import FILE, SITE_ID, API_KEY, LOG_FILE
 
 try:
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                         level=logging.INFO, filename=LOG_FILE)
 except Exception as error_desc:
     print('Can not open logfile.\r\n', error_desc)
-    exit(13)
+    sys.exit(13)
 
 cio = CustomerIO(SITE_ID, API_KEY)
 logger = logging.getLogger(__name__)
@@ -45,9 +47,9 @@ def upload_devices(csv_file):
         csv_files   - Required  : path to csv file (Int)
     """
     try:
-        with open(csv_file, 'r') as device_tokens:
+        with open(csv_file, 'r', encoding="utf-8") as device_tokens:
             data = csv.DictReader(device_tokens)
-            csv_lines = sum(1 for line in open(csv_file)) - 1
+            csv_lines = sum(1 for line in open(csv_file, encoding="utf-8")) - 1
             logging.debug(data.fieldnames)
             errors = 0
             i = 0
@@ -64,7 +66,8 @@ def upload_devices(csv_file):
                     logging.info("%s is associated with %s device id=%s",
                                  row['user_id'], row['operation_system'], row['registration_token'])
                 print_progress_bar(i, csv_lines, prefix='Progress:', suffix=
-                                   f'Complete, line {i} of {csv_lines}, errors: {errors}, current id: {row["user_id"]}',
+                                   f'Complete, line {i} of {csv_lines}, errors: {errors}, '
+                                   f'current id: {row["user_id"]}',
                                    length=50)
     except Exception as err_open:
         print('Failed to open file: ', err_open)
